@@ -1,0 +1,120 @@
+﻿<Application x:Class="MetGlobalCompany.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewmodels="clr-namespace:MetGlobalCompany.WPF.ViewModels"
+             xmlns:views="clr-namespace:MetGlobalCompany.WPF.Views"
+             xmlns:converters="clr-namespace:MetGlobalCompany.WPF.Converters">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml" />
+                <ResourceDictionary Source="Styles/MetGlobalStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToVisibilityConverter x:Key="BoolToVis"/>
+            <converters:InvertBoolConverter x:Key="InvertBoolConverter"/>
+            <converters:EnumDescriptionConverter x:Key="EnumDescConverter"/>
+
+            <DataTemplate DataType="{x:Type viewmodels:SalesDashboardViewModel}">
+                <views:SalesDashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContractorsViewModel}">
+                <views:ContractorsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContractsViewModel}">
+                <views:ContractsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:NomenclatureViewModel}">
+                <views:NomenclatureView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SalesInvoicesViewModel}">
+                <views:SalesInvoicesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PurchaseInvoicesViewModel}">
+                <views:PurchaseInvoicesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:OrdersViewModel}">
+                <views:OrdersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PaymentsViewModel}">
+                <views:PaymentsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AllDocumentsViewModel}">
+                <views:AllDocumentsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PriceTypesViewModel}">
+                <views:PriceTypesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PriceSettingsViewModel}">
+                <views:PriceSettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ContractorFormViewModel}">
+                <views:ContractorFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContractFormViewModel}">
+                <views:ContractFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:NomenclatureCategoryFormViewModel}">
+                <views:NomenclatureCategoryFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:NomenclatureFormViewModel}">
+                <views:NomenclatureFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:OrderFormViewModel}">
+                <views:OrderFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SalesInvoiceFormViewModel}">
+                <views:SalesInvoiceFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PurchaseInvoiceFormViewModel}">
+                <views:PurchaseInvoiceFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PaymentFormViewModel}">
+                <views:PaymentFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:Torg12PreviewViewModel}">
+                <views:Torg12PreviewView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PriceTypeFormViewModel}">
+                <views:PriceTypeFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PriceSettingFormViewModel}">
+                <views:PriceSettingFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContractorSelectViewModel}">
+                <views:ContractorSelectView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContractSelectViewModel}">
+                <views:ContractSelectView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:NomenclatureSelectViewModel}">
+                <views:NomenclatureSelectView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:OrderDetailFormViewModel}">
+                <views:OrderDetailFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SalesInvoiceDetailFormViewModel}">
+                <views:SalesInvoiceDetailFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PurchaseInvoiceDetailFormViewModel}">
+                <views:PurchaseInvoiceDetailFormView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:PriceSettingDetailFormViewModel}">
+                <views:PriceSettingDetailFormView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ImportViewModel}">
+                <views:ImportView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HelpViewModel}">
+                <views:HelpView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

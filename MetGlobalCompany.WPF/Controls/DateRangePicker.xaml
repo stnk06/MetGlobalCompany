@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Controls.DateRangePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
+    <StackPanel Orientation="Horizontal">
+        <DatePicker SelectedDate="{Binding StartDate, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                    mah:TextBoxHelper.Watermark="С (Начало)" mah:TextBoxHelper.UseFloatingWatermark="True" Width="130" Margin="0,0,10,0"/>
+
+        <TextBlock Text="—" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold"/>
+
+        <DatePicker SelectedDate="{Binding EndDate, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                    mah:TextBoxHelper.Watermark="По (Конец)" mah:TextBoxHelper.UseFloatingWatermark="True" Width="130"/>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.PriceTypeFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             Width="500" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Padding="30,20">
+            <StackPanel>
+                <TextBox Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Наименование (напр. Оптовая) *" Margin="0,0,0,20"/>
+                <TextBox Text="{Binding Model.CurrencyCode, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Валюта (по умолчанию RUB)" Margin="0,0,0,20"/>
+                <TextBox Text="{Binding Model.Description, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Описание" TextWrapping="Wrap" AcceptsReturn="True" Height="80" Margin="0,0,0,20"/>
+                <CheckBox IsChecked="{Binding Model.IsIncludesVat}" Content="Цена включает НДС" Margin="0,0,0,10"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Отмена" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="0,0,15,0" Width="100"/>
+                <Button Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Сохранить" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Width="150"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

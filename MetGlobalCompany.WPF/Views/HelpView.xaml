@@ -1,0 +1,434 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.HelpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Width="1100" Height="750" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.PrimaryRed}" Padding="25,20">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconMaterial Kind="BookOpenPageVariantOutline" Width="32" Height="32" Foreground="White" VerticalAlignment="Center"/>
+                <TextBlock Text="Руководство пользователя MetGlobal ERP" FontSize="22" FontWeight="Bold" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="10,20,20,20">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="Padding" Value="20,15"/>
+                    <Setter Property="Margin" Value="0,0,0,5"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+
+            <TabItem Header="1. Введение и Навигация">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Добро пожаловать в MetGlobal ERP" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Система MetGlobal ERP — это комплексное решение для автоматизации бизнес-процессов предприятий оптовой и розничной торговли металлопрокатом. Приложение позволяет вести полный управленческий и оперативный учет: от регистрации входящего звонка клиента до полной отгрузки продукции и контроля взаиморасчетов.
+                        </TextBlock>
+
+                        <TextBlock Text="Навигация по приложению" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,15,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Основное меню приложения расположено в левой части экрана. Оно разделено на логические блоки: аналитика, продажи, закупки, финансы, ценообразование и нормативно-справочная информация. Для перехода в нужный раздел просто кликните левой кнопкой мыши по соответствующему пункту меню.
+                        </TextBlock>
+
+                        <TextBlock Text="Глобальный поиск" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            В верхней правой части приложения расположена строка "Глобальный поиск". Вы можете установить в нее курсор (или нажать комбинацию клавиш Ctrl+F) и начать вводить текст. Поиск автоматически отфильтрует данные в открытом в данный момент разделе (например, если вы находитесь в журнале договоров, система найдет все договоры, в номере или контрагенте которых содержится введенный текст).
+                        </TextBlock>
+
+                        <TextBlock Text="Общие принципы работы со списками" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <Border Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="15" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+                            <StackPanel>
+                                <TextBlock Text="• Добавление новой записи:" FontWeight="SemiBold" Margin="0,0,0,5" FontSize="14"/>
+                                <TextBlock Text="В любом разделе в правом верхнем углу над таблицей находится кнопка 'Добавить'. Нажатие на нее открывает форму создания нового элемента." TextWrapping="Wrap" Margin="15,0,0,10" FontSize="14"/>
+
+                                <TextBlock Text="• Редактирование записи:" FontWeight="SemiBold" Margin="0,0,0,5" FontSize="14"/>
+                                <TextBlock Text="Для того чтобы изменить существующий документ или справочник, просто дважды кликните левой кнопкой мыши по нужной строке в таблице. Также можно выделить строку и нажать кнопку с иконкой карандаша." TextWrapping="Wrap" Margin="15,0,0,10" FontSize="14"/>
+
+                                <TextBlock Text="• Удаление записи:" FontWeight="SemiBold" Margin="0,0,0,5" FontSize="14"/>
+                                <TextBlock Text="Выделите строку одиночным кликом и нажмите кнопку 'Удалить' (иконка корзины). Система всегда запрашивает подтверждение перед необратимым удалением." TextWrapping="Wrap" Margin="15,0,0,0" FontSize="14"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="2. Справочники (Начало работы)">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Заполнение нормативно-справочной базы" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Перед началом работы с документами (созданием заказов, платежей) необходимо заполнить базовые справочники. Без них программа не позволит оформить ни одну операцию.
+                        </TextBlock>
+
+                        <TextBlock Text="Шаг 1. Контрагенты" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Контрагенты" в левом меню.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Нажмите кнопку "Добавить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. В верхней части окна введите ИНН организации (10 цифр для юридических лиц или 12 цифр для ИП).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Нажмите кнопку "Заполнить реквизиты". Приложение свяжется с сервером ФНС и автоматически заполнит поля: Название, КПП, ОГРН, Юридический адрес.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            5. Обязательно выберите "Тип контрагента" из выпадающего списка (Покупатель, Поставщик или Покупатель и Поставщик одновременно).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            6. Введите контактные данные (телефон, email) и нажмите "Сохранить".
+                        </TextBlock>
+
+                        <TextBlock Text="Шаг 2. Договоры контрагентов" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            Все операции в системе ведутся строго в разрезе договоров.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Договоры" и нажмите "Добавить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Введите уникальный номер договора (только цифры и буквы) и выберите дату его заключения.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. В поле Контрагент нажмите на иконку поиска, откроется окно со списком контрагентов. Выберите нужного двойным кликом.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            4. Если у вас созданы Типы цен, выберите тип цены для данного договора. Нажмите "Сохранить".
+                        </TextBlock>
+
+                        <TextBlock Text="Шаг 3. Номенклатура" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            В этом справочнике хранятся товары (металлопрокат) и услуги (доставка, резка).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Номенклатура" и нажмите "Добавить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Заполните рабочее наименование. Оно должно быть максимально понятным (например: "Труба профильная 40х40х2").
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Выберите единицу измерения (шт, кг, т, м).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. При необходимости укажите префикс ГОСТ/ТУ из выпадающего списка и впишите его номер в соседнее поле.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            5. Если вы заводите услугу (например, "Доставка"), обязательно поставьте галочку "Это услуга (не ведется складской учет)", чтобы система не требовала наличие товара на складе при отгрузке. Нажмите "Сохранить".
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="3. Ценообразование">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Настройка прайс-листов" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            В системе реализован гибкий механизм ценообразования. Вы можете создать неограниченное количество типов цен (Оптовая, Розничная, Дилерская) и фиксировать цены на определенную дату.
+                        </TextBlock>
+
+                        <TextBlock Text="Создание Типа цены" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Типы цен".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Нажмите "Добавить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            3. Введите наименование (например: "Оптовая рублевая") и выберите код валюты (RUB или USD). Сохраните.
+                        </TextBlock>
+
+                        <TextBlock Text="Фиксация цен (Установка цен)" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            Документ "Установка цен" работает как утверждение прайс-листа. Пока вы не создадите этот документ, при выборе товара в заказе цена будет равна нулю.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в "Установка цен" и нажмите "Создать".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Выберите Дату документа. Начиная с этой даты (вплоть до создания следующего документа установки цен) будут действовать указанные расценки.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. В нижней части окна нажмите кнопку "Добавить строку" (зеленый плюс).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Откроется небольшое окно. Выберите Номенклатуру из справочника.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            5. Выберите Тип цены (к какому прайс-листу будет относиться эта цена).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            6. Введите саму цену в цифровом формате и нажмите "Применить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            7. Добавьте таким образом все нужные позиции и нажмите главную кнопку "Сохранить" в самом низу документа.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="4. Процесс продаж">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="От Заказа клиента до Реализации" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Процесс продажи состоит из двух этапов: предварительная фиксация намерений (Заказ) и фактическая отгрузка товара со склада (Реализация).
+                        </TextBlock>
+
+                        <TextBlock Text="Этап 1. Заказ клиента" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Заказы клиентов" и нажмите "Создать".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Укажите Контрагента (покупателя) и выберите Договор.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. В табличную часть добавляйте нужные товары. Если для товара была проведена "Установка цен" (по типу цены, указанному в договоре), цена подставится автоматически. Если нет — вы можете ввести цену вручную.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            4. Нажмите "Сохранить". Заказ появится в списке со статусом "Новый". Этот документ не списывает товар со склада.
+                        </TextBlock>
+
+                        <TextBlock Text="Этап 2. Ввод Реализации на основании Заказа" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            Когда товар готов к отгрузке, необходимо создать Реализацию.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Находясь в журнале "Заказы клиентов", выделите один кликом нужный заказ.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. На верхней панели нажмите синюю кнопку "Создать реализацию" (иконка со стрелочкой).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Система автоматически откроет форму "Реализация (УПД)", перенеся туда контрагента, договор и все товары из заказа со всеми ценами и суммами.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Проверьте данные и нажмите "Сохранить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" FontWeight="SemiBold" Margin="0,0,0,15">
+                            Внимание: только проведенная Реализация (зеленая кнопка с галочками) списывает товар со склада и увеличивает долг контрагента перед вами. После проведения документ блокируется от изменений.
+                        </TextBlock>
+
+                        <TextBlock Text="Печать документов" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            В журнале Реализаций выберите проведенный документ и нажмите кнопку "ТОРГ-12". Система сгенерирует печатную форму накладной, которую можно сохранить в PDF или отправить на принтер. Также доступна кнопка "УПД в Excel" для сохранения счета-фактуры.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="5. Закупки товаров">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Оформление поступлений от поставщиков" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Чтобы продать товар, он должен быть на складе. Оприходование товара производится документом "Поступление товаров".
+                        </TextBlock>
+
+                        <TextBlock Text="Инструкция по созданию поступления" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Откройте раздел "Поступления товаров" (Счета поставщиков).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Нажмите кнопку "Добавить".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Заполните Номер входящего документа (номер УПД от поставщика), выберите дату.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Выберите Поставщика (Контрагента) и договор, по которому идет закупка.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            5. В табличную часть добавьте номенклатуру, укажите количество и цену закупки. Суммы рассчитаются автоматически.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            6. Сохраните и проведите документ (зеленая кнопка). После проведения товар мгновенно появляется на балансе вашего склада, а у вас возникает задолженность перед поставщиком.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="6. Банк и Касса (Финансы)">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Учет денежных средств" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Раздел "Банк и касса" (Платежи) предназначен для регистрации всех финансовых движений компании. Платежи закрывают дебиторскую или кредиторскую задолженность, образовавшуюся в результате проведенных реализаций и поступлений.
+                        </TextBlock>
+
+                        <TextBlock Text="Регистрация платежа" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Перейдите в раздел "Банк и касса".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Нажмите "Создать платеж".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Введите номер платежного поручения и дату.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Обязательно выберите "Тип платежа":
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="25,0,0,5">
+                            • Входящий платеж — когда клиент платит вам. Закрывает долг покупателя.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="25,0,0,5">
+                            • Исходящий платеж — когда вы платите поставщику. Закрывает ваш долг.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            5. Выберите контрагента и (очень важно) договор. Взаиморасчеты всегда ведутся по договору.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            6. Введите сумму платежа (формат ввода принимает только положительные числа).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            7. Нажмите "Сохранить" и проведите документ.
+                        </TextBlock>
+
+                        <Border Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="15" CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+                            <StackPanel>
+                                <TextBlock Text="Единый журнал документов" FontWeight="SemiBold" Margin="0,0,0,5" FontSize="14"/>
+                                <TextBlock Text="В системе предусмотрен раздел 'Единый журнал', где все документы (Заказы, УПД, Поступления, Платежи) выведены в единый список. Это удобно для контроля хронологии событий в компании." TextWrapping="Wrap" FontSize="14"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="7. Аналитика и Отчеты">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Анализ продаж и Дашборд" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Для контроля за эффективностью бизнеса в системе предусмотрен мощный аналитический блок. Доступ к нему осуществляется через пункт меню "Анализ продаж".
+                        </TextBlock>
+
+                        <TextBlock Text="Панель управления (Сводка и графики)" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            На первой вкладке "Сводка и графики" отображаются ключевые показатели эффективности за выбранный период:
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="25,0,0,5">
+                            • Общая выручка (по всем проведенным отгрузкам)
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="25,0,0,5">
+                            • Средний чек и количество оформленных УПД
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="25,0,0,15">
+                            • Общее количество проданных товаров (в базовых единицах измерения)
+                        </TextBlock>
+
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            Как пользоваться графиками:
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. На верхней панели укажите период дат ("С" и "По").
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Обязательно нажмите кнопку "Обновить данные".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            3. Наведите курсор мыши на любой столбец в графике "Динамика выручки", чтобы увидеть всплывающую подсказку с точной цифрой выручки и количеством документов за этот день. Справа отобразится таблица "ТОП-10 клиентов" с их вкладом в общую выручку.
+                        </TextBlock>
+
+                        <TextBlock Text="Детальный анализ продаж (Отчет)" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            На второй вкладке "Анализ продаж (Отчет)" находится иерархический табличный отчет, который позволяет развернуть продажи от клиента до конкретной накладной.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Переключитесь на вкладку "Анализ продаж (Отчет)".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Выберите нужный период дат на верхней панели.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Нажмите кнопку "Сформировать отчет".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            4. Появится дерево: на первом уровне - Покупатель (и общая сумма продаж по нему), при раскрытии (клик на стрелочку) - проданная Номенклатура, при дальнейшем раскрытии - конкретные накладные (УПД), дата, цена и количество.
+                        </TextBlock>
+
+                        <TextBlock Text="Экспорт отчета в Excel" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            Сформированный отчет можно легко выгрузить для передачи в бухгалтерию или руководству.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Убедитесь, что отчет успешно сформирован и отображается на экране.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. Нажмите кнопку "Сохранить в Excel" (с зеленой иконкой).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            3. Выберите папку на компьютере и сохраните файл. Внутри выгруженного файла Excel будет сохранена полная структура, включая стандартные группировки строк (плюсики слева), чтобы файл было удобно читать и сворачивать.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="8. Импорт из Excel">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,0,20,20">
+                    <StackPanel>
+                        <TextBlock Text="Массовая загрузка данных (.xlsx)" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            Встроенный модуль импорта позволяет за несколько секунд загрузить тысячи записей из файлов формата Excel. Модуль работает по принципу "Upsert": он ищет запись по ключевому полю, и если находит — обновляет ее данные, а если не находит — создает новую.
+                        </TextBlock>
+
+                        <TextBlock Text="Как запустить импорт" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            1. Нажмите на кнопку "Импорт" с зеленой иконкой Excel в верхней панели приложения.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            2. В выпадающем списке выберите тип загружаемых данных (например, Контрагенты).
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            3. Нажмите кнопку "Обзор..." и выберите подготовленный файл .xlsx на вашем компьютере.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,5">
+                            4. Нажмите "Импортировать".
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            5. В текстовом поле ниже появится подробный лог (отчет). Там будет указано количество новых записей, обновленных записей, а также список ошибок (например, если в файле договоров указан ИНН контрагента, которого нет в базе).
+                        </TextBlock>
+
+                        <TextBlock Text="Строгий порядок загрузки (Критически важно)" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" Margin="0,10,0,10"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,10">
+                            База данных является реляционной (связанной). Вы не сможете загрузить Номенклатуру, если в базе нет Единиц измерения, указанных в файле. Поэтому всегда соблюдайте этот порядок:
+                        </TextBlock>
+                        <Border Background="#FFF3F3" Padding="15" CornerRadius="5" BorderThickness="1" BorderBrush="#FFD6D6">
+                            <StackPanel>
+                                <TextBlock Text="1. Единицы измерения и Типы цен (базовые справочники)" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <TextBlock Text="2. Контрагенты и Номенклатура" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <TextBlock Text="3. Договоры (требуют наличия контрагентов)" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <TextBlock Text="4. Установки цен (требуют номенклатуры и типов цен)" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <TextBlock Text="5. Платежи (требуют договоров и контрагентов)" FontSize="14" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock Text="Правила оформления файлов" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,15,0,5"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" LineHeight="22" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,15">
+                            • Первая строка в файле всегда игнорируется системой (это должна быть строка с заголовками колонок).
+                            <LineBreak/>• Избегайте пустых строк внутри массива данных.
+                            <LineBreak/>• Цены и суммы вводите в цифровом формате, копейки можно отделять как точкой, так и запятой.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+
+        <Border Grid.Row="2" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <Button Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Понятно, закрыть" Style="{StaticResource MetGlobalPrimaryButtonStyle}" HorizontalAlignment="Right" Width="180"/>
+        </Border>
+    </Grid>
+</UserControl>

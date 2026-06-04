@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.ContractsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:behaviors="clr-namespace:MetGlobalCompany.WPF.Behaviors"
+             Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Padding="15">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddNewCommand}" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Margin="0,0,15,0">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="Plus" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Создать договор" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding EditCurrentCommand}" Style="{StaticResource MetGlobalOutlineButtonStyle}" Margin="0,0,30,0">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="Pencil" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Открыть карточку" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- ПАНЕЛЬ ВЫПАДАЮЩИХ ФИЛЬТРОВ -->
+                <TextBlock Text="Фильтры:" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,15,0" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                <ComboBox ItemsSource="{Binding AvailableContractors}" SelectedItem="{Binding SelectedContractorFilter}" Width="250" mah:TextBoxHelper.Watermark="Все контрагенты" mah:TextBoxHelper.ClearTextButton="True"/>
+            </StackPanel>
+        </Border>
+
+        <DataGrid Grid.Row="1" Margin="15,0,15,15" ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" Style="{StaticResource EnterpriseDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}" SortMemberPath="Number" Width="150">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="behaviors:TextHighlightBehavior.HighlightText" Value="{Binding DataContext.SearchText, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" SortMemberPath="Date" Width="120"/>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" SortMemberPath="Name" Width="250"/>
+                <DataGridTextColumn Header="Контрагент" Binding="{Binding Contractor.Name}" SortMemberPath="Contractor.Name" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="behaviors:TextHighlightBehavior.HighlightText" Value="{Binding DataContext.SearchText, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Валюта" Binding="{Binding CurrencyCode}" SortMemberPath="CurrencyCode" Width="100"/>
+                <DataGridCheckBoxColumn Header="Активен" Binding="{Binding IsActive}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

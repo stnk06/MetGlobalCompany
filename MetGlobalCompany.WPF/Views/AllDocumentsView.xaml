@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.AllDocumentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1" Padding="15">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding LoadDataCommand}" Style="{StaticResource MetGlobalOutlineButtonStyle}" Margin="0,0,30,0">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial Kind="Refresh" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Обновить" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <TextBlock Text="Фильтры:" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,15,0" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+
+                <ComboBox ItemsSource="{Binding AvailableDocTypes}" SelectedItem="{Binding SelectedDocTypeFilter}" Width="220" Margin="0,0,15,0" mah:TextBoxHelper.Watermark="Все типы документов" mah:TextBoxHelper.ClearTextButton="True"/>
+                <ComboBox ItemsSource="{Binding AvailableContractors}" SelectedItem="{Binding SelectedContractorFilter}" Width="250" mah:TextBoxHelper.Watermark="Все контрагенты" mah:TextBoxHelper.ClearTextButton="True"/>
+            </StackPanel>
+        </Border>
+
+        <DataGrid Grid.Row="1" Margin="15,15,15,15" ItemsSource="{Binding DocumentsView}" Style="{StaticResource EnterpriseDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy HH:mm}" SortMemberPath="Date" Width="140"/>
+                <DataGridTextColumn Header="Тип документа" Binding="{Binding DocType}" SortMemberPath="DocType" Width="180">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="Foreground" Value="{StaticResource MetGlobal.Brushes.PrimaryRed}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}" SortMemberPath="Number" Width="120">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Контрагент" Binding="{Binding ContractorName}" SortMemberPath="ContractorName" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding TotalAmount, StringFormat={}{0:N2} ₽}" SortMemberPath="TotalAmount" Width="150">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Right"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Проведен" Binding="{Binding IsPosted}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,293 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.SalesDashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:controls="clr-namespace:MetGlobalCompany.WPF.Controls"
+             xmlns:dto="clr-namespace:MetGlobalCompany.Application.DTOs.Analytics;assembly=MetGlobalCompany.Application"
+             Background="{StaticResource MetGlobal.Brushes.BackgroundLight}">
+
+    <Grid>
+        <TabControl mah:TabControlHelper.Underlined="TabPanel" Background="Transparent" BorderThickness="0">
+            <TabItem Header="СВОДКА И ГРАФИКИ" FontSize="16" FontWeight="SemiBold">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="White" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1" Padding="20,15">
+                        <DockPanel>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                                <TextBlock Text="Период:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,15,0"/>
+                                <controls:DateRangePicker StartDate="{Binding FilterStartDate, Mode=TwoWay}" EndDate="{Binding FilterEndDate, Mode=TwoWay}"/>
+                                <Button Command="{Binding ClearDashboardFiltersCommand}" Content="За все время" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="15,0,0,0"/>
+                            </StackPanel>
+                            <Button Command="{Binding LoadDashboardDataCommand}" Style="{StaticResource MetGlobalOutlineButtonStyle}" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="Refresh" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Обновить данные" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </DockPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="White" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" CornerRadius="4" Margin="25,25,25,10" Padding="30,25">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Text="ОБЩАЯ ВЫРУЧКА" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding TotalRevenue, StringFormat={}{0:N0} ₽}" FontSize="32" FontWeight="Light" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                            </StackPanel>
+                            <Border Grid.Column="1" Width="1" Background="{StaticResource MetGlobal.Brushes.Border}" Margin="30,0"/>
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                <TextBlock Text="СРЕДНИЙ ЧЕК" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding AverageReceipt, StringFormat={}{0:N0} ₽}" FontSize="32" FontWeight="Light" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                            </StackPanel>
+                            <Border Grid.Column="3" Width="1" Background="{StaticResource MetGlobal.Brushes.Border}" Margin="30,0"/>
+                            <StackPanel Grid.Column="4" VerticalAlignment="Center">
+                                <TextBlock Text="КОЛИЧЕСТВО УПД" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding TotalInvoices, StringFormat={}{0:N0}}" FontSize="32" FontWeight="Light" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                            </StackPanel>
+                            <Border Grid.Column="5" Width="1" Background="{StaticResource MetGlobal.Brushes.Border}" Margin="30,0"/>
+                            <StackPanel Grid.Column="6" VerticalAlignment="Center">
+                                <TextBlock Text="ПРОДАНО ТОВАРОВ" FontSize="12" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="0,0,0,8"/>
+                                <TextBlock Text="{Binding TotalItemsSold, StringFormat={}{0:N0}}" FontSize="32" FontWeight="Light" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="2" Margin="25,10,25,25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Background="White" CornerRadius="4" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1" Padding="20,15" Background="#FAFAFA">
+                                    <TextBlock Text="ДИНАМИКА ВЫРУЧКИ ПО ДНЯМ" FontSize="13" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                                </Border>
+                                <Border Grid.Row="1" Padding="20">
+                                    <ItemsControl ItemsSource="{Binding SalesChartItems}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="1"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid VerticalAlignment="Bottom" ToolTip="{Binding TooltipText}" Margin="2,0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.PrimaryRed}" Height="{Binding NormalizedHeight}" VerticalAlignment="Bottom" CornerRadius="2,2,0,0">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="{StaticResource MetGlobal.Brushes.PrimaryRedHover}"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+                                                    <TextBlock Grid.Row="1" Text="{Binding Label}" FontSize="10" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="2" Background="White" CornerRadius="4" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1" Padding="20,15" Background="#FAFAFA">
+                                    <TextBlock Text="ТОП-10 КЛИЕНТОВ ПО ВЫРУЧКЕ" FontSize="13" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                                </Border>
+                                <DataGrid Grid.Row="1" ItemsSource="{Binding TopContractors}" Style="{StaticResource EnterpriseDataGridStyle}" BorderThickness="0">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Клиент" Binding="{Binding ContractorName}" Width="*"/>
+                                        <DataGridTextColumn Header="Выручка" Binding="{Binding Revenue, StringFormat={}{0:N0} ₽}" Width="120">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="TextAlignment" Value="Right"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource MetGlobal.Brushes.SuccessGreen}"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="АНАЛИЗ ПРОДАЖ (ОТЧЕТ)" FontSize="16" FontWeight="SemiBold">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="White" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1" Padding="20,15">
+                        <DockPanel>
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                                <TextBlock Text="Период:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,15,0"/>
+                                <controls:DateRangePicker StartDate="{Binding ReportStartDate, Mode=TwoWay}" EndDate="{Binding ReportEndDate, Mode=TwoWay}"/>
+                                <Button Command="{Binding ClearReportFiltersCommand}" Content="За все время" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="15,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                                <Button Command="{Binding GenerateReportCommand}" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Margin="0,0,15,0" Padding="15,8">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FileDocumentOutline" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <TextBlock Text="Сформировать отчет" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Command="{Binding ExportReportCommand}" Style="{StaticResource MetGlobalOutlineButtonStyle}" Foreground="{StaticResource MetGlobal.Brushes.SuccessGreen}" BorderBrush="{StaticResource MetGlobal.Brushes.SuccessGreen}" Padding="15,8">
+                                    <StackPanel Orientation="Horizontal">
+                                        <iconPacks:PackIconMaterial Kind="FileExcelBox" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <TextBlock Text="Сохранить в Excel" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="White" CornerRadius="4" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" Margin="25">
+                        <Grid Grid.IsSharedSizeScope="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" BorderThickness="0,0,0,1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" Padding="5,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150" SharedSizeGroup="DateCol"/>
+                                        <ColumnDefinition Width="100" SharedSizeGroup="QtyCol"/>
+                                        <ColumnDefinition Width="120" SharedSizeGroup="PriceCol"/>
+                                        <ColumnDefinition Width="150" SharedSizeGroup="SumCol"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Контрагент / Номенклатура / Документ" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" Margin="10,0,0,0"/>
+                                    <TextBlock Grid.Column="1" Text="Дата" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}"/>
+                                    <TextBlock Grid.Column="2" Text="Количество" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" TextAlignment="Right"/>
+                                    <TextBlock Grid.Column="3" Text="Цена" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" TextAlignment="Right"/>
+                                    <TextBlock Grid.Column="4" Text="Сумма" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" TextAlignment="Right" Margin="0,0,20,0"/>
+                                </Grid>
+                            </Border>
+
+                            <TreeView Grid.Row="1" ItemsSource="{Binding SalesReport.ContractorGroups}" BorderThickness="0" Background="Transparent" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                <TreeView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MahApps.Styles.TreeViewItem}">
+                                        <Setter Property="IsExpanded" Value="True"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </TreeView.ItemContainerStyle>
+
+                                <TreeView.Resources>
+                                    <HierarchicalDataTemplate DataType="{x:Type dto:SalesReportContractorGroupDto}" ItemsSource="{Binding NomenclatureGroups}">
+                                        <Border Background="#FAFAFA" BorderThickness="0,0,0,1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" Padding="0,8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="DateCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="QtyCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="PriceCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SumCol"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding ContractorName}" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding TotalQuantity, StringFormat={}{0:N0}}" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" TextAlignment="Right"/>
+                                                <TextBlock Grid.Column="4" Text="{Binding TotalSum, StringFormat={}{0:N2} ₽}" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" TextAlignment="Right" Margin="0,0,20,0"/>
+                                            </Grid>
+                                        </Border>
+                                    </HierarchicalDataTemplate>
+
+                                    <HierarchicalDataTemplate DataType="{x:Type dto:SalesReportNomenclatureGroupDto}" ItemsSource="{Binding Items}">
+                                        <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" Padding="0,6">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="DateCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="QtyCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="PriceCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SumCol"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding NomenclatureName}" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding TotalQuantity, StringFormat={}{0:N0}}" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" TextAlignment="Right"/>
+                                                <TextBlock Grid.Column="4" Text="{Binding TotalSum, StringFormat={}{0:N2} ₽}" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" TextAlignment="Right" Margin="0,0,20,0"/>
+                                            </Grid>
+                                        </Border>
+                                    </HierarchicalDataTemplate>
+
+                                    <DataTemplate DataType="{x:Type dto:SalesReportItemDto}">
+                                        <Border BorderThickness="0,0,0,1" BorderBrush="#EEEEEE" Padding="0,4">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="DateCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="QtyCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="PriceCol"/>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SumCol"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                    <iconPacks:PackIconMaterial Kind="FileDocumentOutline" Width="12" Height="12" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding DocumentNumber, StringFormat=УПД № {0}}" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                                                </StackPanel>
+                                                <TextBlock Grid.Column="1" Text="{Binding DocumentDate, StringFormat=dd.MM.yyyy HH:mm}" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding Quantity, StringFormat={}{0:N0}}" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" TextAlignment="Right"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding Price, StringFormat={}{0:N2}}" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" TextAlignment="Right"/>
+                                                <TextBlock Grid.Column="4" Text="{Binding Sum, StringFormat={}{0:N2}}" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" TextAlignment="Right" Margin="0,0,20,0"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </TreeView.Resources>
+                            </TreeView>
+
+                            <Border Grid.Row="2" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" Padding="5,15">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150" SharedSizeGroup="DateCol"/>
+                                        <ColumnDefinition Width="100" SharedSizeGroup="QtyCol"/>
+                                        <ColumnDefinition Width="120" SharedSizeGroup="PriceCol"/>
+                                        <ColumnDefinition Width="150" SharedSizeGroup="SumCol"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="ОБЩИЕ ИТОГИ:" FontWeight="Bold" FontSize="16" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="10,0,0,0"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding SalesReport.GrandTotalQuantity, StringFormat={}{0:N0}}" FontWeight="Bold" FontSize="16" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" TextAlignment="Right"/>
+                                    <TextBlock Grid.Column="4" Text="{Binding SalesReport.GrandTotalSum, StringFormat={}{0:N2} ₽}" FontWeight="Bold" FontSize="16" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" TextAlignment="Right" Margin="0,0,20,0"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

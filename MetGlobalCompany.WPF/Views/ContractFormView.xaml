@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.ContractFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:MetGlobalCompany.WPF.Controls"
+             xmlns:behaviors="clr-namespace:MetGlobalCompany.WPF.Behaviors"
+             Width="600" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Padding="30,20">
+            <StackPanel>
+                <controls:LookupControl Text="{Binding Model.Contractor.Name}" Watermark="Контрагент *"
+                                        SelectCommand="{Binding SelectContractorCommand}"
+                                        ClearCommand="{Binding ClearContractorCommand}" Margin="0,0,0,25"/>
+
+                <Grid Margin="0,0,0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Text="{Binding Model.Number, UpdateSourceTrigger=PropertyChanged}" behaviors:InputBehaviors.IsNumericOnly="True" mah:TextBoxHelper.Watermark="Номер договора (только цифры) *"/>
+                    <DatePicker Grid.Column="2" SelectedDate="{Binding Model.Date}" mah:TextBoxHelper.Watermark="Дата договора"/>
+                </Grid>
+
+                <TextBox Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Наименование (для поиска)" Margin="0,0,0,25"/>
+
+                <Grid Margin="0,0,0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding CurrencyCodes}" SelectedItem="{Binding Model.CurrencyCode}" mah:TextBoxHelper.Watermark="Валюта договора *"/>
+                    <ComboBox Grid.Column="2" ItemsSource="{Binding PriceTypes}" SelectedValue="{Binding Model.PriceTypeId}" SelectedValuePath="Id" DisplayMemberPath="Name" mah:TextBoxHelper.Watermark="Тип цен по договору"/>
+                </Grid>
+
+                <CheckBox IsChecked="{Binding Model.IsActive}" Content="Договор действует" Margin="0,0,0,10"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Отмена" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="0,0,15,0" Width="100"/>
+                <Button Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Сохранить" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Width="150"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

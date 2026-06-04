@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.PurchaseInvoiceDetailFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:MetGlobalCompany.WPF.Controls"
+             Width="550" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Padding="30,25">
+            <StackPanel>
+                <controls:LookupControl Text="{Binding Nomenclature.Name}" Watermark="Выберите номенклатуру *"
+                                        SelectCommand="{Binding SelectNomenclatureCommand}"
+                                        ClearCommand="{Binding ClearNomenclatureCommand}" Margin="0,0,0,25"/>
+
+                <Grid Margin="0,0,0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Количество *"/>
+                    <TextBox Grid.Column="2" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Закупочная цена *"/>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <TextBlock Text="СУММА: " FontSize="14" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.GrayText}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Sum, StringFormat={}{0:N2} ₽}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Отмена" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="0,0,15,0" Width="100"/>
+                <Button Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Применить" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Width="150"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

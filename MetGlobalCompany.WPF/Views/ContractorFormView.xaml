@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.ContractorFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:converters="clr-namespace:MetGlobalCompany.WPF.Converters"
+             xmlns:behaviors="clr-namespace:MetGlobalCompany.WPF.Behaviors"
+             Width="800" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <UserControl.Resources>
+        <converters:EnumDescriptionConverter x:Key="EnumDescConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,0,0,1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel>
+                <TextBlock Text="Автозаполнение по ИНН (ФНС)" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" Margin="0,0,0,10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{Binding SearchInnText, UpdateSourceTrigger=PropertyChanged}" 
+                             mah:TextBoxHelper.Watermark="Введите ИНН организации (10 или 12 цифр)" 
+                             mah:TextBoxHelper.ClearTextButton="True" Margin="0,0,15,0"/>
+                    <Button Grid.Column="1" Command="{Binding SearchByInnCommand}" Content="Заполнить реквизиты" 
+                            Style="{StaticResource MetGlobalOutlineButtonStyle}" Width="200" BorderBrush="{StaticResource MetGlobal.Brushes.PrimaryRed}" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Основные реквизиты" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBox Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Краткое наименование *" Margin="0,0,0,15"/>
+                        <TextBox Text="{Binding Model.FullName, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Полное наименование" Margin="0,0,0,15"/>
+                        <ComboBox SelectedItem="{Binding Model.Type}" ItemsSource="{Binding ContractorTypes}" mah:TextBoxHelper.Watermark="Тип контрагента *">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource EnumDescConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBox Text="{Binding Model.Inn, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="ИНН" Margin="0,0,0,15"/>
+                        <TextBox Text="{Binding Model.Kpp, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="КПП" Margin="0,0,0,15"/>
+                        <TextBox Text="{Binding Model.Ogrn, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="ОГРН/ОГРНИП"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Text="Контактная информация и адреса" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+                <TextBox Text="{Binding Model.LegalAddress, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Юридический адрес" Margin="0,0,0,15"/>
+                <TextBox Text="{Binding Model.PhysicalAddress, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Фактический адрес" Margin="0,0,0,15"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{Binding Model.ContactPerson, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Контактное лицо"/>
+                    <TextBox Grid.Column="2" Text="{Binding Model.Phone, UpdateSourceTrigger=PropertyChanged}" behaviors:InputBehaviors.IsPhoneMask="True" mah:TextBoxHelper.Watermark="Телефон"/>
+                    <TextBox Grid.Column="4" Text="{Binding Model.Email, UpdateSourceTrigger=PropertyChanged}" mah:TextBoxHelper.Watermark="Email"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <Border Grid.Row="2" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Отмена" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="0,0,15,0" Width="100"/>
+                <Button Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Сохранить" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Width="150"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

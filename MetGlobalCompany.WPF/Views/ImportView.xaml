@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.ImportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:converters="clr-namespace:MetGlobalCompany.WPF.Converters"
+             Width="600" Height="450" Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+    <UserControl.Resources>
+        <converters:EnumDescriptionConverter x:Key="EnumDescConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,0,0,1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel>
+                <TextBlock Text="Настройки импорта" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" Margin="0,0,0,15"/>
+
+                <ComboBox ItemsSource="{Binding ImportTargets}" SelectedItem="{Binding SelectedTarget}" mah:TextBoxHelper.Watermark="Выберите тип импортируемых данных" Margin="0,0,0,15">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDescConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{Binding FilePath, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" mah:TextBoxHelper.Watermark="Путь к файлу .xlsx" Margin="0,0,15,0"/>
+                    <Button Grid.Column="1" Command="{Binding SelectFileCommand}" Content="Обзор..." Style="{StaticResource MetGlobalOutlineButtonStyle}" Width="100"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" Padding="20">
+            <TextBox Text="{Binding LogText, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" FontFamily="Consolas" FontSize="12" BorderThickness="1" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" mah:TextBoxHelper.Watermark="Здесь будет отображен лог загрузки..."/>
+        </Border>
+        <Border Grid.Row="2" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}" Padding="20" BorderThickness="0,1,0,0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Закрыть" Style="{StaticResource MetGlobalFlatButtonStyle}" Margin="0,0,15,0" Width="100"/>
+                <Button Command="{Binding ImportCommand}" Content="Импортировать" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Width="150" IsEnabled="{Binding IsBusy, Converter={StaticResource InvertBoolConverter}, FallbackValue=True}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

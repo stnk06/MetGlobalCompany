@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="MetGlobalCompany.WPF.Views.NomenclatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:entities="clr-namespace:MetGlobalCompany.Domain.Entities;assembly=MetGlobalCompany.Domain"
+             Background="{StaticResource MetGlobal.Brushes.BackgroundWhite}">
+
+    <UserControl.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type entities:NomenclatureCategory}" ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal" Margin="2,4">
+                <iconPacks:PackIconMaterial Kind="Folder" Foreground="{StaticResource MetGlobal.Brushes.PrimaryRed}" Margin="0,0,8,0" VerticalAlignment="Center" Width="16" Height="16"/>
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MetGlobal.Brushes.DarkText}"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" MinWidth="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,1,0" Background="{StaticResource MetGlobal.Brushes.BackgroundLight}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Padding="15" BorderBrush="{StaticResource MetGlobal.Brushes.Border}" BorderThickness="0,0,0,1">
+                    <DockPanel>
+                        <TextBlock Text="Группы номенклатуры" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" Foreground="{StaticResource MetGlobal.Brushes.DarkText}" DockPanel.Dock="Left"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                            <Button Command="{Binding EditCategoryCommand}" Style="{StaticResource MetGlobalFlatButtonStyle}" ToolTip="Переименовать выбранную группу" Padding="5" Margin="0,0,5,0">
+                                <iconPacks:PackIconMaterial Kind="PencilOutline" Width="16" Height="16"/>
+                            </Button>
+                            <Button Command="{Binding AddRootCategoryCommand}" Style="{StaticResource MetGlobalFlatButtonStyle}" ToolTip="Добавить корневую группу" Padding="5">
+                                <iconPacks:PackIconMaterial Kind="FolderPlus" Width="18" Height="18"/>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <TreeView x:Name="CategoriesTreeView" Grid.Row="1" ItemsSource="{Binding RootCategories}" BorderThickness="0" Background="Transparent" Margin="5">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MahApps.Styles.TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True" />
+                            <Setter Property="Padding" Value="5,2" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                </TreeView>
+            </Grid>
+        </Border>
+
+        <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" Background="{StaticResource MetGlobal.Brushes.Border}" ShowsPreview="True"/>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Padding="15">
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding AddNomenclatureCommand}" Style="{StaticResource MetGlobalPrimaryButtonStyle}" Margin="0,0,15,0">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="Plus" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Добавить позицию" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding EditNomenclatureCommand}" Style="{StaticResource MetGlobalOutlineButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="Pencil" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="Изменить карточку" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+            <DataGrid Grid.Row="1" Margin="15,0,15,15" ItemsSource="{Binding Nomenclatures}" SelectedItem="{Binding SelectedNomenclature}" Style="{StaticResource EnterpriseDataGridStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" SortMemberPath="Article" Width="120"/>
+                    <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" SortMemberPath="Name" Width="350">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="ГОСТ" Binding="{Binding Gost}" SortMemberPath="Gost" Width="150"/>
+                    <DataGridTextColumn Header="Марка/Плотность" Binding="{Binding Density}" SortMemberPath="Density" Width="150"/>
+                    <DataGridCheckBoxColumn Header="Услуга" Binding="{Binding IsService}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>
